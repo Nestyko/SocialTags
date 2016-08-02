@@ -90,6 +90,8 @@ $email = $_POST['correo'];
 // ************* Mostrar error si viene de un login errado
 if (isset($_GET['notRegistered'])){
   $error = "Usuario no registrado por favor registrese para poder disfrutar de la red social";
+}else{
+  $error = null;
 }
 
 ?>
@@ -138,30 +140,60 @@ if (isset($_GET['notRegistered'])){
     
     <p class="login-box-msg">Registrate y se un nuevo miembro</p>
 
-    <form method="post" name="form1" action="<?php echo $editFormAction; ?>">
+    <form method="post" name="form1" id="registration_form" action="<?php echo $editFormAction; ?>">
       <div class="form-group has-feedback">
-        <input type="text" name="nombre" class="form-control" placeholder="Nombre">
+        <input type="text" name="nombre" required class="form-control" placeholder="Nombre"
+        data-required-error="El nombre es requerido"
+        data-error="Por favor coloque su nombre"
+        maxlength="45"
+        minlength="2"
+        >
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <div class="help-block with-errors"></div>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" name="apellido" class="form-control" placeholder="Apellido">
+        <input type="text" name="apellido" required class="form-control" placeholder="Apellido"
+        data-required-error="El nombre es requerido"
+        data-error="Por favor coloque su apellido"
+        maxlength="45"
+        minlength="2"
+        >
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <div class="help-block with-errors"></div>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" name="correo" class="form-control" placeholder="CorreoElectronico">
+        <input type="email" name="correo" class="form-control" placeholder="CorreoElectronico"
+        data-validate="true"
+        maxlength="250"
+        data-required-error="El correo electronico es requerido"
+        data-error="Escriba una direccion de correo válida"
+        data-match-error="Escriba una direccion de correo válida"
+        >
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <div class="help-block with-errors"></div>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" name="pass" class="form-control" placeholder="Password">
+
+        <input type="password" required name="pass" id="pass" class="form-control" placeholder="Password"
+        maxlength="250"
+        minlength="8"
+        data-minlength-error="debe contener al menos 8 caracteres"
+        
+        >
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <div class="help-block with-errors"></div>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Repita su password">
+        <input type="password" required class="form-control" placeholder="Repita su password"
+        data-repeatpass="true"
+        >
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <div class="help-block with-errors"></div>
       </div>
       <div class="form-group has-feedback">
         <input type="date" name="fecha_nacimiento" class="form-control" required placeholder="Fecha de nacimiento">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <div class="help-block with-errors"></div>
       </div>
       <div class="row">
         <div class="col-xs-8">
@@ -187,12 +219,11 @@ if (isset($_GET['notRegistered'])){
   <!-- /.form-box -->
 </div>
 
-<!-- InstanceEndEditable -->
-<script src="file:///C|/xampp/htdocs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="dist/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="file:///C|/xampp/htdocs/bootstrap/js/bootstrap.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="file:///C|/xampp/htdocs/plugins/iCheck/icheck.min.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
 <script>
   $(function () {
     $('input').iCheck({
@@ -201,5 +232,23 @@ if (isset($_GET['notRegistered'])){
       increaseArea: '20%' // optional
     });
   });
-</script></body>
+</script>
+
+<script src="dist/js/validator.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#registration_form').validator({
+      custom: {
+        repeatpass: function($el) {
+          var pass = $('#pass').val();
+          if($el.val() !== pass){
+            return 'Contraseñas no coinciden';
+          }
+        }
+      }
+    });
+  });
+</script>
+
+</body>
 <!-- InstanceEnd --></html>
