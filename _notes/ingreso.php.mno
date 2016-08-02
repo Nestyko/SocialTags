@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_Recordset1" value="name:idp;datatype:int,name:fecha;datatype:date,name:contenido;datatype:string,name:usuario;datatype:int,name:id;datatype:int,name:correo;datatype:string,name:nombre;datatype:string,name:apellido;datatype:string,name:fecha_nacimiento;datatype:date,name:pass;datatype:string,name:educacion;datatype:string,name:destresas;datatype:string,name:perfil;datatype:string,name:usuario;datatype:int,name:usuario1;datatype:int" />
+	<infoitem key="UD_unicapubli" value="name:idp;datatype:int,name:fecha;datatype:date,name:contenido;datatype:string,name:usuario;datatype:int" />
+</info>

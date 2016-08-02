@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_Recordset1" value="name:id;datatype:int,name:fecha;datatype:date,name:contenido;datatype:string,name:publicacion;datatype:int,name:usuario;datatype:int" />
+	<infoitem key="UD_actualiar" value="name:id;datatype:int,name:correo;datatype:string,name:nombre;datatype:string,name:apellido;datatype:string,name:fecha_nacimiento;datatype:date,name:pass;datatype:string,name:educacion;datatype:string,name:destresas;datatype:string,name:perfil;datatype:string" />
+	<infoitem key="UD_Recordset2" value="name:idp;datatype:int,name:fecha;datatype:date,name:contenido;datatype:string,name:usuario;datatype:int" />
+	<infoitem key="UD_elfinal" value="name:id;datatype:int,name:correo;datatype:string,name:nombre;datatype:string,name:apellido;datatype:string,name:fecha_nacimiento;datatype:date,name:pass;datatype:string,name:educacion;datatype:string,name:destresas;datatype:string,name:perfil;datatype:string" />
+	<infoitem key="UD_tag" value="name:id;datatype:int,name:tag;datatype:string,name:usuario;datatype:int,name:publicacion;datatype:int,name:usuario_id;datatype:int,name:tag_id;datatype:int,name:id;datatype:int,name:correo;datatype:string,name:nombre;datatype:string,name:apellido;datatype:string,name:fecha_nacimiento;datatype:date,name:pass;datatype:string,name:educacion;datatype:string,name:destresas;datatype:string,name:perfil;datatype:string" />
+</info>

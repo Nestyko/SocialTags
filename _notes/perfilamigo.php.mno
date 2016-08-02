@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_perfil" value="name:id;datatype:int,name:correo;datatype:string,name:nombre;datatype:string,name:apellido;datatype:string,name:fecha_nacimiento;datatype:date,name:pass;datatype:string,name:educacion;datatype:string,name:destresas;datatype:string,name:perfil;datatype:string" />
+	<infoitem key="UD_validar" value="name:usuario;datatype:int,name:usuario1;datatype:int" />
+	<infoitem key="UD_publicaciones" value="name:idp;datatype:int,name:fecha;datatype:date,name:contenido;datatype:string,name:usuario;datatype:int,name:id;datatype:int,name:correo;datatype:string,name:nombre;datatype:string,name:apellido;datatype:string,name:fecha_nacimiento;datatype:date,name:pass;datatype:string,name:educacion;datatype:string,name:destresas;datatype:string,name:perfil;datatype:string" />
+</info>

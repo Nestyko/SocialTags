@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_publicacion" value="name:idp;datatype:int,name:fecha;datatype:date,name:contenido;datatype:string,name:usuario;datatype:int,name:id;datatype:int,name:correo;datatype:string,name:nombre;datatype:string,name:apellido;datatype:string,name:fecha_nacimiento;datatype:date,name:pass;datatype:string" />
+	<infoitem key="UD_comentarios" value="name:id;datatype:int,name:fecha;datatype:date,name:contenido;datatype:string,name:publicacion;datatype:int,name:usuario;datatype:int" />
+	<infoitem key="UD_Recordset1" value="name:id;datatype:int,name:fecha;datatype:date,name:contenido;datatype:string,name:publicacion;datatype:int,name:usuario;datatype:int" />
+</info>

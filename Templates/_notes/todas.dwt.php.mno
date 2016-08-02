@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_usuarios" value="name:id;datatype:int,name:correo;datatype:string,name:nombre;datatype:string,name:apellido;datatype:string,name:fecha_nacimiento;datatype:date,name:pass;datatype:string,name:educacion;datatype:string,name:destresas;datatype:string" />
+</info>

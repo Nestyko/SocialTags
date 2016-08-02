@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_perfil" value="name:id;datatype:int,name:tag;datatype:string,name:usuario;datatype:int,name:publicacion;datatype:int" />
+	<infoitem key="UD_tag" value="name:id;datatype:int,name:tag;datatype:string,name:usuario;datatype:int,name:publicacion;datatype:int" />
+</info>
