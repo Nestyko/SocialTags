@@ -114,6 +114,11 @@ if (isset($_GET['notRegistered'])){
   <!-- iCheck -->
   <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 
+  
+
+  <link rel="stylesheet" href="dist/css/default.css">
+   <link rel="stylesheet" href="dist/css/default.date.css">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -191,8 +196,11 @@ if (isset($_GET['notRegistered'])){
         <div class="help-block with-errors"></div>
       </div>
       <div class="form-group has-feedback">
-        <input type="date" name="fecha_nacimiento" class="form-control" required placeholder="Fecha de nacimiento">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <div class='input-group date' id="datepicker">
+                    <input type='text' class="form-control datepicker" name="fecha_nacimiento" required/>
+                    
+                </div>
+        
         <div class="help-block with-errors"></div>
       </div>
       <div class="row">
@@ -221,9 +229,21 @@ if (isset($_GET['notRegistered'])){
 
 <script src="dist/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
+
 <script src="dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
+<script src="dist/js/picker.js"></script>
+<script src="dist/js/picker.date.js"></script>
+
+<!-- iCheck 
 <script src="plugins/iCheck/icheck.min.js"></script>
+
+
+
+
+
+
+
+
 <script>
   $(function () {
     $('input').iCheck({
@@ -233,10 +253,17 @@ if (isset($_GET['notRegistered'])){
     });
   });
 </script>
+-->
 
 <script src="dist/js/validator.js"></script>
 <script>
   $(document).ready(function() {
+
+    $('.datepicker').pickadate({
+      format: 'yyyy-mm-dd',
+      max: new Date(new Date().getTime() - 1000*60*60*24*365*18 )
+    });
+    
     $('#registration_form').validator({
       custom: {
         repeatpass: function($el) {
@@ -247,8 +274,13 @@ if (isset($_GET['notRegistered'])){
         }
       }
     });
+    
+     
+
   });
 </script>
+
+
 
 </body>
 <!-- InstanceEnd --></html>

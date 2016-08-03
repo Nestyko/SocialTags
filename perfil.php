@@ -138,6 +138,9 @@ $totalRows_tag = mysql_num_rows($tag);
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+    <link rel="stylesheet" href="dist/css/default.css">
+   <link rel="stylesheet" href="dist/css/default.date.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -532,7 +535,7 @@ $totalRows_tag = mysql_num_rows($tag);
 
                     <div class="col-sm-10">
                       
-                      <input class="form-control" type="text"
+                      <input class="form-control datepicker" type="text"
                       required name="fecha_nacimiento" value="<?php echo htmlentities($row_actualiar['fecha_nacimiento'], ENT_COMPAT, 'utf-8'); ?>" size="32">
                       <div class="help-block with-errors"></div>
                     </div>
@@ -837,9 +840,16 @@ function subirimagen()
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="dist/js/validator.js"></script>
+
+<script src="dist/js/picker.js"></script>
+<script src="dist/js/picker.date.js"></script>
 <script>
   $(document).ready(function() {
     $('#perfil_form').validator();
+    $('.datepicker').pickadate({
+      format: 'yyyy-mm-dd',
+      max: new Date(new Date().getTime() - 1000*60*60*24*365*18 )
+    });
   });
 </script>
 
