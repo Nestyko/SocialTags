@@ -156,7 +156,7 @@ $totalRows_unicapubli = mysql_num_rows($unicapubli);
                     
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Amigos</a>
+                    <a href="misamigos.php">Amigos</a>
                   </div>
                   <div class="col-xs-4 text-center">
                     
