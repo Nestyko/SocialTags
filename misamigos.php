@@ -59,8 +59,10 @@ $row_Recordset1 = mysql_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 
 $a_actualiar = "0";
+$usuario_actual_id = "0";
 if (isset($_GET["id"])) {
   $a_actualiar = $_GET["id"];
+  $usuario_actual_id = $_GET["id"];
 }
 $a_actualiar = $_SESSION['MM_Username'];
 $a_actualiar = "0";
@@ -110,10 +112,7 @@ $totalRows_tag = mysql_num_rows($tag);
 
 ?>
 
-
-
-<!DOCTYPE html>
-<html><!-- InstanceBegin template="/Templates/todas.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<html> 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -138,11 +137,9 @@ $totalRows_tag = mysql_num_rows($tag);
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-
-    <link rel="stylesheet" href="dist/css/default.css">
-   <link rel="stylesheet" href="dist/css/default.date.css">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini"> 
+  
 <div class="wrapper">
 
   <header class="main-header">
@@ -350,9 +347,29 @@ $totalRows_tag = mysql_num_rows($tag);
         <!-- /.col -->
         <div class="col-md-9">
           <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Publicaciones</a></li>
-              <li><a href="#settings" data-toggle="tab">Modificar Cuenta</a></li>
+            <ul align="center"><a>MIS AMIGOS</a></br>
+            
+				
+				<?php 
+				$link = mysql_connect("localhost", "root"); 
+				mysql_select_db("red", $link); 
+        $usuario_actual_id = ObtenerIdUsuario($_SESSION['MM_Username']);
+        $query_amigos = sprintf("SELECT usuario.nombre, usuario.apellido, usuario.correo, usuario.perfil FROM usuario_has_usuario INNER JOIN usuario ON usuario_has_usuario.usuario=usuario.id WHERE usuario_has_usuario.usuario1=%s;" ,  GetSQLValueString($usuario_actual_id, "int"));
+				$result = mysql_query( $query_amigos, $link); 
+				if ($row = mysql_fetch_array($result)){ 
+   				echo "<table class='table table-hover text-center'> \n"; 
+   				echo "<tr><th>Nombre</th><th>Apellido</th><th>Correo</th></tr>\n"; 
+   				do { 
+      			echo "<tr><td>".$row["nombre"]."</td><td>".$row["apellido"]."</td><td>".$row["correo"]."</td></tr> \n"; 
+   				} while ($row = mysql_fetch_array($result)); 
+   				echo "</table> \n"; 
+				} else { 
+				echo "¡ No se ha encontrado ningún registro !" . $usuario_actual_id; 
+				} 
+				?> 
+
+              
+             
             </ul>
             <div class="tab-content">
             <?php if ($totalRows_Recordset2>0){ ?>
@@ -535,7 +552,7 @@ $totalRows_tag = mysql_num_rows($tag);
 
                     <div class="col-sm-10">
                       
-                      <input class="form-control datepicker" type="text"
+                      <input class="form-control" type="text"
                       required name="fecha_nacimiento" value="<?php echo htmlentities($row_actualiar['fecha_nacimiento'], ENT_COMPAT, 'utf-8'); ?>" size="32">
                       <div class="help-block with-errors"></div>
                     </div>
@@ -840,16 +857,9 @@ function subirimagen()
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script src="dist/js/validator.js"></script>
-
-<script src="dist/js/picker.js"></script>
-<script src="dist/js/picker.date.js"></script>
 <script>
   $(document).ready(function() {
     $('#perfil_form').validator();
-    $('.datepicker').pickadate({
-      format: 'yyyy-mm-dd',
-      max: new Date(new Date().getTime() - 1000*60*60*24*365*18 )
-    });
   });
 </script>
 
@@ -866,3 +876,9 @@ mysql_free_result($elfinal);
 
 mysql_free_result($tag);
 ?>
+
+
+
+  
+</body> 
+</html>

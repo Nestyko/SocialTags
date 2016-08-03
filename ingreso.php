@@ -42,8 +42,30 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['contenido'], "text"),
                        GetSQLValueString($_POST['usuario'], "int"));
 
+  
+
   mysql_select_db($database_badell, $badell);
   $Result1 = mysql_query($insertSQL, $badell) or die(mysql_error());
+
+  $publicacion_id = "0";
+  $publicacion_id_query = "SELECT * FROM publicacion WHERE fecha = now()";
+  $result2 = mysql_query($publicacion_id_query, $badell) or die(mysql_error());
+  $rows_num = mysql_num_rows($result2);
+  if( $rows_num > 0) {
+    $publicacion_id = $result2['id'];
+  }
+
+  if($_POST['img']) {
+    $image_path = "0";
+    $image_path = "Img_Publicacion/" . $_POST['img'];
+
+
+
+    $imagen_publicacion = sprintf("INSERT INTO imagen (url, publicacion) VALUES (%s , %s)",
+      GetSQLValueString($image_path, "int"),
+      GetSQLValueString($publication_id, "int"));
+
+  }
 }
 ?>
 <?php
@@ -156,7 +178,7 @@ $totalRows_unicapubli = mysql_num_rows($unicapubli);
                     
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Amigos</a>
+                    <a href="misamigos.php">Amigos</a>
                   </div>
                   <div class="col-xs-4 text-center">
                     
@@ -268,12 +290,58 @@ $totalRows_unicapubli = mysql_num_rows($unicapubli);
         data-maxlength-error="No debe exceder los 256 caracteres"
         name="contenido" class="form-control" rows="3" placeholder="Expresa lo que sientes"></textarea>
         <div class="help-block with-errors"></div>
+
+
+        <!-- Subir Imagen -->
+        <input class="form-control" value="<?php echo htmlentities($row_actualiar['perfil'], ENT_COMPAT, 'utf-8'); ?>" placeholder="imagen" type="hidden" name="img" value="" size="32">
+                    <input class="form-control"  type="button" name="button" id="button" value="Imagen de Perfil" onclick="javascript:subirimagen();">
+
+
         <input type="submit" class="btn btn-default" value="Agregar Publicacion">
         <input type="hidden" name="usuario" value="<?php echo ObtenerIdUsuario($_SESSION['MM_Username'])  ?>" size="32">
           <input type="hidden" name="MM_insert" value="form1">
         </form>
 
       </div>
+
+
+
+      <div class="tab-content">
+            <?php if ($totalRows_Recordset1>0){ ?>
+              <?php do { ?>
+                <div class="active tab-pane" id="activity">
+                  <!-- Post -->
+                  <div class="post">
+                    <div class="user-block">
+                      <img class="img-circle img-bordered-sm" src="Img_Perfil/<?php echo $row_actualiar['perfil']; ?>" alt="user image">
+                      <span class="username">
+                        <a href="#"> <?php echo ObtenerNombreUsuario($_SESSION['MM_Username']) ?> &nbsp; <?php echo ObtenerApellidoUsuario($_SESSION['MM_Username']) ?></a>
+                        <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                      <span class="description">Fecha de publicacion- <?php echo $row_Recordset1['fecha']; ?> </span>
+                      </div>
+                    <!-- /.user-block -->
+                    <p>
+                      <?php echo $row_Recordset1['contenido']; ?>
+                      </p>
+                    <ul class="list-inline">
+                      <li>
+                        </li>
+                      <li class="pull-right">
+                        <a href="comentarios.php?id=<?php echo $row_Recordset1['idp']; ?>" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios</a></li>
+                      </ul>
+                    
+                    
+                    </div>
+                  <!-- Post -->
+                  
+                  <!-- /.post -->
+                </div>
+                <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
+				<?php }?>
+<!-- /.tab-pane -->
+
+
       <?php if ($totalRows_unicapubli>0){ ?>
       <div class="post">
                   <div class="user-block">
@@ -574,6 +642,15 @@ $totalRows_unicapubli = mysql_num_rows($unicapubli);
   $(document).ready(function() {
     $('.form-validate').validator();
   });
+
+function subirimagen()
+{
+	self.name = 'opener';
+	remote = open('subir_imagen.php', 'remote', 'width=400,height=150,location=no,scrollbars=yes,menubars=no,toolbars=no,resizable=yes,fullscreen=no, status=yes');
+ 	remote.focus();
+	}
+
+
 </script>
 
 </body>
