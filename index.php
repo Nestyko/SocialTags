@@ -131,7 +131,14 @@ if (isset($_POST['email'])) {
       </div>
 
       <div class="form-group has-feedback">
-        <input id="pass" name="pass" type="password" class="form-control" placeholder="Contraseña">
+        <input required
+        data-validate="true"
+        data-required-error="Por favor ingrese una contraseña"
+        data-minlength-error="Debe contener al menos 8 caracteres"
+        data-maxlength-error="Puede contener maximo 200 caracteres"
+        minlength="8"
+        maxlength="200"
+         id="pass" name="pass" type="password" class="form-control" placeholder="Contraseña">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         <div class="help-block with-errors"></div>
       </div>
