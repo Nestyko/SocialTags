@@ -34,7 +34,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 // *** Redirect if username exists
 $MM_flag="MM_insert";
 if (isset($_POST[$MM_flag])) {
-  $MM_dupKeyRedirect="correoRepetido.php";
+  $MM_dupKeyRedirect='registro.php?error=Correo Repetido';
   $loginUsername = $_POST['correo'];
   $LoginRS__query = sprintf("SELECT correo FROM usuario WHERE correo=%s", GetSQLValueString($loginUsername, "text"));
   mysql_select_db($database_badell, $badell);
@@ -45,8 +45,8 @@ if (isset($_POST[$MM_flag])) {
   if($loginFoundUser){
     $MM_qsChar = "?";
     //append the username to the redirect page
-    if (substr_count($MM_dupKeyRedirect,"?") >=1) $MM_qsChar = "&";
-    $MM_dupKeyRedirect = $MM_dupKeyRedirect . $MM_qsChar ."requsername=".$loginUsername;
+    /*if (substr_count($MM_dupKeyRedirect,"?") >=1) $MM_qsChar = "&";
+    $MM_dupKeyRedirect = $MM_dupKeyRedirect . $MM_qsChar ."requsername=".$loginUsername;*/
     header ("Location: $MM_dupKeyRedirect");
     exit;
   }
@@ -92,6 +92,10 @@ if (isset($_GET['notRegistered'])){
   $error = "Usuario no registrado por favor registrese para poder disfrutar de la red social";
 }else{
   $error = null;
+}
+
+if (isset($_GET['error'])){
+  $error = $_GET['error'];
 }
 
 ?>
