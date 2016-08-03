@@ -303,8 +303,14 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
               
         <hr><?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
         <?php }?></div>
-         <form method="post" name="form1" action="<?php echo $editFormAction; ?>">
-                  <input name="contenido" class="form-control input-sm" type="text" placeholder="Escriba su comentario">
+         <form class="form-validate" method="post" name="form1" action="<?php echo $editFormAction; ?>">
+                  <input required name="contenido" class="form-control input-sm" type="text" 
+                  minlength="2"
+                  maxlength="256"
+                  data-minlength-error="Debe tener al menos 2 caracteres"
+                  data-maxlength-error="No debe contener mas de 256 caracteres"
+                  placeholder="Escriba su comentario">
+                  <div class="help-block with-errors"></div>
                   <input type="submit" class="btn btn-default" value="AgregarComentario">
                 <input type="hidden" name="publicacion" value="<?php echo $row_publicacion['idp']; ?>" size="32">
  				<input type="hidden" name="usuario" value="<?php echo ObtenerIdUsuario($_SESSION['MM_Username']) ?>" size="32">
@@ -533,6 +539,12 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 <script src="dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script src="dist/js/validator.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.form-validate').validator();
+  });
+</script>
 </body>
 <!-- InstanceEnd --></html>
 <?php

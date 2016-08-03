@@ -236,7 +236,7 @@ $totalRows_tag = mysql_num_rows($tag);
       <!-- search form -->
       <form action="personas.php" method="post" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="c" id="c" class="form-control" placeholder="Buscar...">
+          <input type="email" name="c" id="c" class="form-control" placeholder="Buscar...">
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -482,26 +482,49 @@ $totalRows_tag = mysql_num_rows($tag);
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="settings">
-                <form method="post" name="form1" action="<?php echo $editFormAction; ?>" class="form-horizontal">
+                <form id="perfil_form" method="post" name="form1" action="<?php echo $editFormAction; ?>" class="form-horizontal">
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">CorreoElectronico</label>
+                    <label for="inputName" class="col-sm-2 control-label"
+                    
+                    >CorreoElectronico</label>
 
                     <div class="col-sm-10">
-                      <input class="form-control" type="text" name="correo" value="<?php echo htmlentities($row_actualiar['correo'], ENT_COMPAT, 'utf-8'); ?>" size="32">
+                      <input class="form-control" type="email" name="correo" value="<?php echo htmlentities($row_actualiar['correo'], ENT_COMPAT, 'utf-8'); ?>" size="32"
+                      required
+                    data-required-error="El Correo Electronico es requerido"
+                    data-error="Verifique el Correo Electronico"
+                    minlength="7"
+                      >
+                      <div class="help-block with-errors"></div>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Nombre</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="nombre" value="<?php echo htmlentities($row_actualiar['nombre'], ENT_COMPAT, 'utf-8'); ?>" size="32">
+                      <input type="text" class="form-control" name="nombre" 
+                      required
+                      data-required-error="El nombre es requerido"
+                      data-error="Por favor coloque su nombre"
+                      maxlength="45"
+                      minlength="2"
+                      value="<?php echo htmlentities($row_actualiar['nombre'], ENT_COMPAT, 'utf-8'); ?>" size="32">
+                      <div class="help-block with-errors"></div>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Apellido</label>
 
                     <div class="col-sm-10">
-                      <input class="form-control" type="text" name="apellido" value="<?php echo htmlentities($row_actualiar['apellido'], ENT_COMPAT, 'utf-8'); ?>" size="32">
+                      <input class="form-control" type="text" 
+                      required
+                      name="apellido"
+                      data-required-error="El nombre es requerido"
+                      data-error="Por favor coloque su apellido"
+                      maxlength="45"
+                      minlength="2"
+                       value="<?php echo htmlentities($row_actualiar['apellido'], ENT_COMPAT, 'utf-8'); ?>" size="32">
+                       <div class="help-block with-errors"></div>
                     </div>
                   </div>
                   <div class="form-group">
@@ -509,15 +532,23 @@ $totalRows_tag = mysql_num_rows($tag);
 
                     <div class="col-sm-10">
                       
-                      <input class="form-control" type="text" name="fecha_nacimiento" value="<?php echo htmlentities($row_actualiar['fecha_nacimiento'], ENT_COMPAT, 'utf-8'); ?>" size="32">
+                      <input class="form-control" type="text"
+                      required name="fecha_nacimiento" value="<?php echo htmlentities($row_actualiar['fecha_nacimiento'], ENT_COMPAT, 'utf-8'); ?>" size="32">
+                      <div class="help-block with-errors"></div>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">Contraseña</label>
 
                     <div class="col-sm-10">
-                     <input class="form-control" type="password" name="pass" value="<?php echo htmlentities($row_actualiar['pass'], ENT_COMPAT, 'utf-8'); ?>" size="32">
+                     <input class="form-control" type="password"
+                     required  name="pass"
+                     maxlength="250"
+                    minlength="8"
+                    data-minlength-error="debe contener al menos 8 caracteres"
+                      value="<?php echo htmlentities($row_actualiar['pass'], ENT_COMPAT, 'utf-8'); ?>" size="32">
                     </div>
+                    <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">Educacion</label>
@@ -805,6 +836,13 @@ function subirimagen()
 <script src="dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script src="dist/js/validator.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#perfil_form').validator();
+  });
+</script>
+
 </body>
 <!-- InstanceEnd --></html>
 <?php

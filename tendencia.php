@@ -202,7 +202,7 @@ $tag =  $_POST['tag'];
       <!-- search form -->
       <form action="personas.php" method="post" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="c" id="c" class="form-control" placeholder="Buscar...">
+          <input type="email" name="c" id="c" class="form-control" placeholder="Buscar...">
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
