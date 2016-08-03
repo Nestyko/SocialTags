@@ -59,8 +59,10 @@ $row_Recordset1 = mysql_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 
 $a_actualiar = "0";
+$usuario_actual_id = "0";
 if (isset($_GET["id"])) {
   $a_actualiar = $_GET["id"];
+  $usuario_actual_id = $_GET["id"];
 }
 $a_actualiar = $_SESSION['MM_Username'];
 $a_actualiar = "0";
@@ -351,19 +353,18 @@ $totalRows_tag = mysql_num_rows($tag);
 				<?php 
 				$link = mysql_connect("localhost", "root"); 
 				mysql_select_db("red", $link); 
-				$result = mysql_query("SELECT usuario.nombre, usuario.apellido, usuario.correo, usuario.perfil FROM usuario_has_usuario
-				INNER JOIN usuario
-				ON usuario_has_usuario.usuario=usuario.id
-				WHERE usuario_has_usuario.usuario1=27;", $link); 
+        $usuario_actual_id = ObtenerIdUsuario($_SESSION['MM_Username']);
+        $query_amigos = sprintf("SELECT usuario.nombre, usuario.apellido, usuario.correo, usuario.perfil FROM usuario_has_usuario INNER JOIN usuario ON usuario_has_usuario.usuario=usuario.id WHERE usuario_has_usuario.usuario1=%s;" ,  GetSQLValueString($usuario_actual_id, "int"));
+				$result = mysql_query( $query_amigos, $link); 
 				if ($row = mysql_fetch_array($result)){ 
-   				echo "<table align = 'center' border = '1'> \n"; 
-   				echo "<tr><td>Nombre</td><td>Apellido</td><td>Correo</td></tr>\n"; 
+   				echo "<table class='table table-hover text-center'> \n"; 
+   				echo "<tr><th>Nombre</th><th>Apellido</th><th>Correo</th></tr>\n"; 
    				do { 
       			echo "<tr><td>".$row["nombre"]."</td><td>".$row["apellido"]."</td><td>".$row["correo"]."</td></tr> \n"; 
    				} while ($row = mysql_fetch_array($result)); 
    				echo "</table> \n"; 
 				} else { 
-				echo "¡ No se ha encontrado ningún registro !"; 
+				echo "¡ No se ha encontrado ningún registro !" . $usuario_actual_id; 
 				} 
 				?> 
 
